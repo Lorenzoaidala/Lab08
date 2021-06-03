@@ -16,21 +16,29 @@ public class Model {
 	private Graph<Airport, DefaultWeightedEdge> grafo;
 	private Map <Integer, Airport> idMapAirports;
 	private ExtFlightDelaysDAO dao;
-	
+
 	public Model() {
 		idMapAirports = new HashMap<Integer,Airport>();
 		dao = new ExtFlightDelaysDAO();
 
 	}
-	
-	public void creaGrafo() {
+
+	public void creaGrafo(Integer distanzaMedia) {
 		grafo = new SimpleWeightedGraph(DefaultWeightedEdge.class);
-		
+
 		dao.loadAllAirports(idMapAirports);
 		Graphs.addAllVertices(grafo, idMapAirports.values());
-		
-		for(Flight f : dao.loadAllFlights()) {
-			Graphs.addEdge(this.grafo, idMapAirports.get(f.getId()));
+
+		for (Rotta r : dao.getRotte(idMapAirports, distanzaMedia)) {
+			
+			DefaultWeightedEdge edge = grafo.getEdge(r.getA1(), r.getA2());
+			if(edge==null) {
+				Graphs.addEdge(grafo,r.getA1(), r.getA2(), r.getPeso());
+			}else {
+				Double peso = grafo.getEdgeWeight(edge);
+				Double newPeso = peso +(peso/2);
+				
+			}
 		}
+
 	}
-}

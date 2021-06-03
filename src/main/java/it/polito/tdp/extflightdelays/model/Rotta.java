@@ -4,8 +4,8 @@ package it.polito.tdp.extflightdelays.model;
 public class Rotta {
 	private Airport a1;
 	private Airport a2;
-	private Integer peso;
-	public Rotta(Airport a1, Airport a2, Integer peso) {
+	private Double peso;
+	public Rotta(Airport a1, Airport a2, Double peso) {
 		super();
 		this.a1 = a1;
 		this.a2 = a2;
@@ -23,10 +23,10 @@ public class Rotta {
 	public void setA2(Airport a2) {
 		this.a2 = a2;
 	}
-	public Integer getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
-	public void setPeso(Integer peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 	@Override
