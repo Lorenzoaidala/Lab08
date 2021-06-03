@@ -101,7 +101,7 @@ public class ExtFlightDelaysDAO {
 		String sql ="SELECT ORIGIN_AIRPORT_ID as id1, DESTINATION_AIRPORT_ID as id2, AVG(DISTANCE) as avgg "
 				+ "				FROM flights "
 				+ "				GROUP BY ORIGIN_AIRPORT_ID, DESTINATION_AIRPORT_ID "
-				+ "				HAVING > ?";
+				+ "				HAVING avgg > ?";
 		List<Rotta> result = new ArrayList<Rotta>();
 		try {
 			Connection conn = ConnectDB.getConnection();

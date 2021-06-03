@@ -1,7 +1,9 @@
 package it.polito.tdp.extflightdelays.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
@@ -30,15 +32,23 @@ public class Model {
 		Graphs.addAllVertices(grafo, idMapAirports.values());
 
 		for (Rotta r : dao.getRotte(idMapAirports, distanzaMedia)) {
-			
+
 			DefaultWeightedEdge edge = grafo.getEdge(r.getA1(), r.getA2());
 			if(edge==null) {
 				Graphs.addEdge(grafo,r.getA1(), r.getA2(), r.getPeso());
 			}else {
 				Double peso = grafo.getEdgeWeight(edge);
-				Double newPeso = peso +(peso/2);
-				
+				Double newPeso = (peso+r.getPeso())/2;
+				grafo.setEdgeWeight(edge, newPeso);
+
 			}
 		}
-
 	}
+	public List<Rotta> getRotteSalvate(){
+		List<Rotta> result = new ArrayList<Rotta>();
+		for(DefaultWeightedEdge e : grafo.edgeSet()) {
+			Rotta r = new Rotta()
+		}
+	}
+
+}
