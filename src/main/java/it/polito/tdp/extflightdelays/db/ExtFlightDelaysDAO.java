@@ -12,6 +12,7 @@ import java.util.Map;
 import it.polito.tdp.extflightdelays.model.Airline;
 import it.polito.tdp.extflightdelays.model.Airport;
 import it.polito.tdp.extflightdelays.model.Flight;
+import it.polito.tdp.extflightdelays.model.Rotta;
 
 public class ExtFlightDelaysDAO {
 
@@ -96,5 +97,21 @@ public class ExtFlightDelaysDAO {
 		}
 	}
 
-	
+	public List<Rotta> getRotta(){
+		String sql ="SELECT ORIGIN_AIRPORT_ID, DESTINATION_AIRPORT_ID, DISTANCE "
+				+ "FROM flights";
+		List<Rotta> result = new ArrayList<Rotta>();
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			ResultSet res = st.executeQuery();
+			
+			while(res.next()) {
+				result.add(res.get)
+			}
+		} catch(SQLException e) {
+			System.out.println("Errore connessione al database");
+			throw new RuntimeException("Error Connection Database");
+		}
+	}
 }
