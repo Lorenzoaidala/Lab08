@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.extflightdelays.model.Model;
+import it.polito.tdp.extflightdelays.model.Rotta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,7 +36,24 @@ public class FXMLController {
 
     @FXML
     void doAnalizzaAeroporti(ActionEvent event) {
-    	//TODO
+    	txtResult.clear();
+    	try {
+    		String input = distanzaMinima.getText();
+    		if(input=="") {
+    			txtResult.setText("DEVI inserire un numero");
+    			return;
+    		}
+    			
+    		int dmin = Integer.parseInt(input);
+    		model.creaGrafo(dmin);
+    		txtResult.appendText(String.format("Il grafo è stato creato con %d vertici e %d archi.\n", model.getNVertici(), model.getNArchi()));
+    		for(Rotta r : model.getRotteSalvate()) {
+    			txtResult.appendText("Aeroporto 1: "+r.getA1().toString()+"; Aeroporto 2: "+r.getA2().toString()+"; Distanza media: "+r.getPeso()+".\n");
+    		}
+    	}catch(NumberFormatException nfe) {
+    		txtResult.setText("Il valore inserito DEVE essere un numero INTERO.");
+    		throw new RuntimeException("Inserire un numero");
+    	}
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

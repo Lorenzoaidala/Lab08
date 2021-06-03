@@ -47,8 +47,18 @@ public class Model {
 	public List<Rotta> getRotteSalvate(){
 		List<Rotta> result = new ArrayList<Rotta>();
 		for(DefaultWeightedEdge e : grafo.edgeSet()) {
-			Rotta r = new Rotta()
+			Rotta r = new Rotta(this.grafo.getEdgeSource(e), this.grafo.getEdgeTarget(e),this.grafo.getEdgeWeight(e));
+			result.add(r);
 		}
+		return result;
+	}
+	
+	public int getNVertici() {
+		return this.grafo.vertexSet().size();
+	}
+	
+	public int getNArchi() {
+		return this.grafo.edgeSet().size();
 	}
 
 }
