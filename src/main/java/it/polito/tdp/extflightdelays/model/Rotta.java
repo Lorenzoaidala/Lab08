@@ -31,7 +31,7 @@ public class Rotta {
 	}
 	@Override
 	public String toString() {
-		return "a1=" + a1 + ", a2=" + a2 + ", peso=" + peso;
+		return "["+a1.getAirportName()+" - "+a2.getAirportName()+"]. Distanza media: "+this.peso;
 	}
 	
 	

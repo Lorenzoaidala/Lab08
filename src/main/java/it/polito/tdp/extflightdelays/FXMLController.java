@@ -48,7 +48,10 @@ public class FXMLController {
     		model.creaGrafo(dmin);
     		txtResult.appendText(String.format("Il grafo è stato creato con %d vertici e %d archi.\n", model.getNVertici(), model.getNArchi()));
     		for(Rotta r : model.getRotteSalvate()) {
-    			txtResult.appendText("Aeroporto 1: "+r.getA1().toString()+"; Aeroporto 2: "+r.getA2().toString()+"; Distanza media: "+r.getPeso()+".\n");
+    			txtResult.appendText(r.toString()+"\n");
+    			if(r.getPeso()<dmin) {
+    				System.out.println(r.toString()+"\n");
+    			}
     		}
     	}catch(NumberFormatException nfe) {
     		txtResult.setText("Il valore inserito DEVE essere un numero INTERO.");
